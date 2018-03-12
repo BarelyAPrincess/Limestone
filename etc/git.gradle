@@ -1,0 +1,31 @@
+def exec( cmd, rtn )
+{
+	try
+	{
+		def stdout = new ByteArrayOutputStream()
+		exec {
+			commandLine cmd
+			standardOutput = stdout
+		}
+		return stdout.toString().trim()
+	}
+	catch ( Throwable e )
+	{
+		return rtn
+	}
+}
+
+def gitDescribe()
+{
+	exec( ['git', 'rev-parse', '--short', 'HEAD'], 'unknown' )
+}
+
+def gitBranch()
+{
+	exec( ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], null )
+}
+
+def gitInitSubmodules()
+{
+	exec( ['git', 'submodule', 'update', '--init', '--recursive'], null )
+}

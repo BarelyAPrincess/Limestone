@@ -1,0 +1,11 @@
+# Game Files
+/projects/run/config
+/projects/run/lib
+/projects/run/logs
+/projects/run/worlds
+/projects/run/plugins
+!/projects/run/.gitkeep
+/projects/run/*
+
+# Minecraft Code
+/minecraft

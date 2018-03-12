@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# -u = --no-search-upwards
+
+# Selectively execute on projects that exist locally
+./gradlew --project-dir projects/LimestoneClient --daemon -u licenseFormat
+./gradlew --project-dir projects/LimestoneServer --daemon -u licenseFormat

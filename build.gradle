@@ -1,0 +1,101 @@
+buildscript {
+	repositories {
+		jcenter()
+		mavenCentral()
+		maven {
+			name = "forge"
+			url = "http://files.minecraftforge.net/maven"
+		}
+		maven {
+			name = "sonatype"
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+		maven {url 'https://repo.glowstone.net/repository/internal/'}
+		maven {url 'https://repo.glowstone.net/repository/snapshots/'}
+		maven {url 'http://repo.md-5.net/content/repositories/releases/'}
+		maven {url 'http://ci.emc.gs/nexus/content/groups/aikar/'}
+	}
+
+	dependencies {
+		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+	}
+}
+
+repositories {
+	jcenter()
+	mavenCentral()
+	maven {url 'https://repo.glowstone.net/repository/internal/'}
+	maven {url 'https://repo.glowstone.net/repository/snapshots/'}
+	maven {url 'http://repo.md-5.net/content/repositories/releases/'}
+	maven {url 'http://ci.emc.gs/nexus/content/groups/aikar/'}
+}
+
+apply plugin: "idea"
+apply plugin: "net.minecraftforge.gradle.patcher"
+apply from: project.file( 'etc/git.gradle' )
+
+task setupDev {
+	dependsOn 'setupClientDev', 'setupServerDev', 'copyGitHooks'
+	doFirst {
+		gitInitSubmodules()
+	}
+	doLast {
+		copy {
+			from 'etc/scripts'
+			into '.git/hooks'
+		}
+	}
+}
+
+task setupClientDev {dependsOn 'setup'}
+
+task setupServerDev {
+	// Does Nothing - For Now
+}
+
+minecraft.version = "1.12.2"
+
+minecraft {
+	mappings = 'snapshot_nodoc_20171003'
+	workspaceDir = "projects/LimestoneClient/minecraft"
+	versionJson = "projects/LimestoneClient/jsons/${minecraft.version}-dev.json"
+	buildUserdev = false
+	buildInstaller = false
+	installerVersion = "1.5"
+
+	def common = {
+		patchPrefixOriginal "../src-base/minecraft"
+		patchPrefixChanged "../src-work/minecraft"
+		mainClassClient "net.minecraft.launchwrapper.Launch"
+		// tweakClassClient "net.minecraftforge.fml.common.launcher.FMLTweaker"
+		mainClassServer "net.minecraft.launchwrapper.Launch"
+		// tweakClassServer "net.minecraftforge.fml.common.launcher.FMLServerTweaker"
+	}
+
+	projects {
+		forge {
+			rootDir "."
+			patchDir "projects/LimestoneClient/patches/minecraft"
+			patchAfter "clean"
+			genPatchesFrom "clean"
+			genMcpPatches = false
+			applyMcpPatches = false
+			s2sKeepImports = true
+			with common
+		}
+	}
+}
+
+group 'net.limestone'
+version '2018.0'
+
+processJson {
+	releaseJson = "projects/Limestone/jsons/${minecraft.version}-rel.json"
+	addReplacements( ["@minecraft_version@": project.minecraft.version,
+	                  "@version@"          : project.version,
+	                  "@project@"          : "Limestone",
+	                  "@artifact@"         : "net.limestone:limestone:${project.version}",
+	                  "@universal_jar@"    : {'minecraft'},
+	                  "@timestamp@"        : new Date().format( "yyyy-MM-dd'T'HH:mm:ssZ" ),] )
+}

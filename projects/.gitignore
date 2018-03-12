@@ -1,0 +1,8 @@
+# Game Files
+/gamedata/config
+/gamedata/lib
+/gamedata/logs
+/gamedata/worlds
+/gamedata/plugins
+/gamedata/*
+!/gamedata/.gitkeep

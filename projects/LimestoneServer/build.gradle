@@ -1,0 +1,73 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'license'
+apply plugin: 'checkstyle'
+
+buildscript {
+	repositories {
+		jcenter()
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+	}
+}
+
+defaultTasks 'clean', 'build'
+
+group 'net.limestone'
+version '2018.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+allprojects {
+	repositories {
+		jcenter()
+		mavenCentral()
+		maven {
+			name 'minecraft'
+			url 'https://libraries.minecraft.net/'
+		}
+	}
+}
+
+compileJava {options.encoding = 'UTF-8'}
+
+javadoc {options.encoding = "UTF-8"}
+
+license {
+	header file( '../../etc/HEADER' )
+	ignoreFailures true
+	strictCheck true
+	mapping 'yaml', 'SCRIPT_STYLE'
+	mapping 'yml', 'SCRIPT_STYLE'
+	excludes( ['**/*.archive',
+	           '**/*.md5',
+	           '**/*.txt',
+	           '**/*.bmp',
+	           '**/*.png',
+	           '**/*.jpg',
+	           '**/*.yaml',
+	           '**/*.yml',
+	           '**/*.properties'] )
+	ext.year = Calendar.getInstance().get( Calendar.YEAR )
+	ext.name = 'Amelia DeWitt'
+	ext.email = 'TheAmeliaDeWitt@gmail.com'
+}
+
+checkstyle {
+	configFile = rootProject.file( 'etc/checkstyle.xml' )
+	configProperties = ["basedir": project.projectDir]
+}
+
+dependencies {
+	testCompile( group: 'junit', name: 'junit', version: '4.12' ) {
+		exclude group: 'org.hamcrest'
+	}
+	testCompile 'org.hamcrest:hamcrest-library:1.3'
+
+	compile project( ':AmeliaLib:Common' )
+}

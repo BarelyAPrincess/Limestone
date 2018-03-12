@@ -1,0 +1,16 @@
+[13:19:43] [main/INFO]: Extra: []
+[13:19:43] [main/INFO]: Running with arguments: [--userProperties, {}, --assetsDir, /home/ameliad/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, @@MCVERSION@@]
+[13:19:43] [main/INFO]: Setting user: Player316
+[13:19:45] [main/INFO]: LWJGL Version: 2.9.4
+[13:19:46] [main/INFO]: Reloading ResourceManager: Default
+[13:19:46] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[13:19:46] [Thread-3/INFO]: Initializing LWJGL OpenAL
+[13:19:46] [Thread-3/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[13:19:47] [Thread-3/INFO]: OpenAL initialized.
+[13:19:47] [Sound Library Loader/INFO]: Sound engine started
+[13:19:48] [main/INFO]: Created: 1024x512 textures-atlas
+[13:19:50] [main/INFO]: Narrator library successfully loaded
+[13:19:51] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[13:20:01] [main/INFO]: Stopping!
+[13:20:01] [main/INFO]: SoundSystem shutting down...
+[13:20:01] [main/WARN]: Author: Paul Lamb, www.paulscode.com

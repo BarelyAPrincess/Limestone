@@ -1,0 +1,5 @@
+include ':AmeliaLib:Common'
+
+project( ':AmeliaLib:Common' ).projectDir = new File( '../../modules/common' )
+
+rootProject.name = 'LimestoneServer'

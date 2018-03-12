@@ -1,0 +1,7 @@
+sourceSets {
+    main.java.srcDir 'src/main/start'
+    main.java.srcDir '/home/ameliad/Development/Java/Minecraft/Limestone/src/main/java/'
+    main.resources.srcDir '/home/ameliad/Development/Java/Minecraft/Limestone/src/main/resources/'
+    test.java.srcDir '/home/ameliad/Development/Java/Minecraft/Limestone/src/test/java/'
+    test.resources.srcDir '/home/ameliad/Development/Java/Minecraft/Limestone/src/test/resources/'
+}

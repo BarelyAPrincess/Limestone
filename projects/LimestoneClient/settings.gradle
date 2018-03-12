@@ -1,0 +1,8 @@
+include ':Minecraft', ':Minecraft:Forge', ':Minecraft:Clean', ':AmeliaLib:Common'
+
+project( ':Minecraft' ).projectDir = new File( './minecraft' )
+project( ':Minecraft:Forge' ).projectDir = new File( './minecraft/Forge' )
+project( ':Minecraft:Clean' ).projectDir = new File( './minecraft/Clean' )
+project( ':AmeliaLib:Common' ).projectDir = new File( '../../modules/common' )
+
+rootProject.name = 'LimestoneClient'
